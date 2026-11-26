@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+Thumbs.db
+
+# private: never publish
+tools/
+*.atlas
+*.orbweave

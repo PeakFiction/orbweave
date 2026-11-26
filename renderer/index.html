@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orbweave</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230d1326'/%3E%3Ccircle cx='10' cy='11' r='3' fill='%234cc9f0'/%3E%3Ccircle cx='22' cy='13' r='3' fill='%23ffd166'/%3E%3Ccircle cx='15' cy='23' r='3' fill='%235eeb9b'/%3E%3Cpath d='M10 11L22 13L15 23Z' fill='none' stroke='%237aa2ff' stroke-width='1.2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="orbweave.css">
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<div id="hud" class="glass">
+  <div id="brand"><b>ORBWEAVE</b><span>your map</span></div>
+  <div id="counts"></div>
+  <div class="hsec" id="h-types"></div>
+  <div class="hsec" id="h-lens"></div>
+  <details id="h-rels"><summary>Connections</summary><div id="h-rellist"></div></details>
+</div>
+
+<div id="seg" class="glass" role="tablist">
+  <button data-v="map" class="on">Map</button><button data-v="index">Index</button>
+</div>
+<div id="ovl" class="glass" hidden></div>
+<section id="index" class="glass" hidden></section>
+
+<div id="dock" class="glass">
+  <button class="ib" id="b-back" title="Back (Alt+←)" aria-label="Back">←</button>
+  <button class="ib" id="b-fwd" title="Forward (Alt+→)" aria-label="Forward">→</button>
+  <button class="ib" id="b-fit" title="Show everything (F)" aria-label="Fit all">⛶</button>
+  <button class="ib" id="b-set" title="Settings: categories, connections, views, file (Ctrl+,)" aria-label="Settings">⚙</button>
+  <button class="ib" id="b-help" title="Help (?)" aria-label="Help">?</button>
+  <button id="status" title="">…</button>
+</div>
+
+<div id="cmdwrap"><div id="cmdin">
+  <div id="hint">Up/Down choose · Enter open · Shift+Enter create new · Esc clear · try #tag or type:person</div>
+  <div id="cmdlist" class="glass" hidden></div>
+  <div id="cmdbox" class="glass">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9aa6c6" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="cmd" placeholder="Search, or type a new name to add it…" autocomplete="off" spellcheck="false">
+    <kbd>/</kbd>
+  </div>
+</div></div>
+
+<aside id="panel" class="glass"><div id="pbody"></div></aside>
+<div id="tip" class="glass"></div>
+<div id="toast" class="glass" hidden></div>
+<div id="welcome" class="glass" hidden></div>
+<div id="modal" hidden><div id="mbox" class="glass"></div></div>
+<div id="dlg" hidden><div class="dbox glass"></div></div>
+<div id="start" hidden></div>
+<div id="tour" hidden><div id="tour-spot"></div><div id="tour-card" class="glass"></div></div>
+
+<input type="file" id="file-img" accept="image/*" hidden>
+
+<datalist id="dl-status"><option value="Idea"><option value="To do"><option value="In progress"><option value="Done"><option value="On hold"><option value="Active"><option value="Archived"></datalist>
+<datalist id="dl-class"><option value="Public"><option value="Shared with a few people"><option value="Private"><option value="Confidential"></datalist>
+<datalist id="dl-method"><option value="By hand"><option value="Email"><option value="Meeting"><option value="Phone call"><option value="File or document"><option value="App or website"><option value="Automatic"></datalist>
+<datalist id="dl-freq"><option value="All the time"><option value="Daily"><option value="Weekly"><option value="Monthly"><option value="Once a term or quarter"><option value="Once a year"><option value="When needed"></datalist>
+
+<script src="core.js"></script>
+<script src="view.js"></script>
+<script src="ui.js"></script>
+<script src="ui2.js"></script>
+<script src="sample.js"></script>
+<script src="files.js"></script>
+<script src="tour.js"></script>
+<script src="boot.js"></script>
+</body>
+</html>

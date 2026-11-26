@@ -1,0 +1,76 @@
+{
+  "name": "orbweave",
+  "productName": "Orbweave",
+  "version": "1.0.0",
+  "description": "Orbweave: a local, offline map for anything you want to connect. No AI, no network.",
+  "author": "Orbweave contributors",
+  "license": "MIT",
+  "private": true,
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/codec.test.js && node test/session.test.js",
+    "dist:win": "electron-builder --win portable --x64",
+    "dist:mac": "electron-builder --mac dmg",
+    "dist:mac:universal": "electron-builder --mac dmg --universal"
+  },
+  "build": {
+    "appId": "local.orbweave.app",
+    "productName": "Orbweave",
+    "copyright": "Orbweave contributors",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "compression": "normal",
+    "fileAssociations": [
+      {
+        "ext": "orbweave",
+        "name": "Orbweave file",
+        "description": "Orbweave map",
+        "role": "Editor"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "Orbweave-${version}-portable.${ext}"
+    },
+    "portable": {
+      "artifactName": "Orbweave-${version}-portable.${ext}"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns",
+      "artifactName": "Orbweave-${version}-${arch}.${ext}",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "title": "Orbweave ${version}",
+      "writeUpdateInfo": false
+    },
+    "publish": null
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  }
+}

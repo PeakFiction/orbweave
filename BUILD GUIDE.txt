@@ -1,0 +1,157 @@
+ORBWEAVE - BUILD GUIDE
+======================
+Result:  Windows -> ONE file  Orbweave-1.0.0-portable.exe   (no install, double-click)
+         Mac     -> ONE file  Orbweave-1.0.0-arm64.dmg      (open it, drag Orbweave to Applications)
+Save file: Orbweave's own binary format, .orbweave (not JSON). Pictures live inside it.
+Optional password = AES-256 encryption of the whole file.
+
+You build the Windows exe on Windows, and the Mac dmg on a Mac.
+A dmg cannot be built on Windows.
+
+
+WHAT YOU NEED (once, per computer)
+----------------------------------
+Node.js LTS  (includes npm)   https://nodejs.org   -> download the LTS installer, accept defaults.
+Check it worked. Open a terminal and run:
+    node -v
+    npm -v
+Both must print a version number.
+
+  Windows terminal: open this folder in File Explorer, click the address bar,
+  type  cmd  and press Enter.
+  Mac terminal: open Terminal, type  cd  then a space, drag this folder into
+  the Terminal window, press Enter.
+
+Internet is needed ONLY while building (downloads Electron and the packager).
+The finished app never touches the network.
+
+
+STEP 1 - TRY IT WITHOUT BUILDING (recommended first)
+----------------------------------------------------
+In the terminal, inside this folder:
+    npm install
+    npm start
+Wait for "npm install" to finish (1-3 minutes the first time; uses about 400 MB of disk).
+The Orbweave window opens and starts the short tutorial (first launch only).
+Afterwards click "Create a new map...", pick a name and a folder.
+If this works, the build will work.
+
+Optional self-check:   npm test      (tests the save-file format; prints PASSED)
+
+To see the first-launch tutorial again from scratch, delete the file
+orbweave-settings.json from the app's settings folder:
+    Windows:  %APPDATA%\Orbweave\
+    Mac:      ~/Library/Application Support/Orbweave/
+(Normal users replay it from Settings > Tutorial & help.)
+
+
+STEP 2A - BUILD THE WINDOWS EXE  (on Windows)
+---------------------------------------------
+    npm install          (skip if you already did it)
+    npm run dist:win
+Takes 1-4 minutes. Output:
+    dist\Orbweave-1.0.0-portable.exe        (about 110 MB)
+That single file is the app. Copy it anywhere (Desktop, USB stick). Double-click to run.
+Nothing is installed. The app keeps its recent-files list and the "tutorial seen"
+flag in its own settings folder under %APPDATA%\Orbweave.
+Start-up takes a few seconds because a portable exe unpacks itself each launch.
+
+First run on Windows: SmartScreen may say "Windows protected your PC".
+The exe is not code-signed (signing costs money). Click "More info" > "Run anyway".
+Some antivirus tools also dislike unsigned portable exes; if yours blocks it, allow it.
+
+
+STEP 2B - BUILD THE MAC DMG  (on a Mac)
+---------------------------------------
+Copy this whole folder to the Mac (do NOT copy node_modules or dist if they exist).
+Install Node.js LTS on the Mac. Then in Terminal inside the folder:
+    npm install
+    npm run dist:mac
+Output:
+    dist/Orbweave-1.0.0-arm64.dmg     (Apple Silicon Mac: M1/M2/M3/M4)
+    dist/Orbweave-1.0.0-x64.dmg       (Intel Mac)
+The name shows the type of Mac you built on. The dmg runs on that type only.
+To make one dmg that runs on both:   npm run dist:mac:universal   (bigger file)
+
+Install: double-click the .dmg, drag Orbweave onto Applications (or anywhere).
+First launch: the app is not notarized by Apple, so macOS will refuse a normal
+double-click. Right-click Orbweave > Open > Open. You only do this once.
+If macOS says the app is "damaged": open Terminal and run
+    xattr -cr /Applications/Orbweave.app
+then right-click > Open again.
+
+
+PUBLISHING ON GITHUB
+--------------------
+This folder contains no git files. After  git init  add a .gitignore containing at least:
+    node_modules/
+    dist/
+Commit the rest (src, renderer, build, test, package.json, package-lock.json, README.md,
+LICENSE, this guide). Attach the finished .exe and .dmg to a GitHub Release instead of
+committing them (they are about 100 MB each; GitHub rejects single files over 100 MB).
+LICENSE is MIT with the placeholder holder "Orbweave contributors". Put your own name
+or organisation there, or choose a different license, before you publish.
+"author" in package.json is also a placeholder.
+Release-notes tip for users: the builds are unsigned, so SmartScreen/Gatekeeper warn.
+
+
+USING THE SAME DATA ON WINDOWS AND MAC
+--------------------------------------
+Your data is one .orbweave file. Put it in OneDrive / iCloud Drive / Dropbox / a USB drive
+and open it from either computer ("Open a map..."). Open it on one computer at a
+time. If the file changes on disk while Orbweave is open, Orbweave reloads it; if you also
+had unsaved edits it asks which version to keep.
+Backups: next to your file, a folder  <name>.backups  holds dated copies
+(at most one per 10 minutes, newest 40 kept). Restore = open one of them.
+
+PASSWORD
+  Settings > File & backup > Set a password. There is NO reset. Forget it and the file
+  (and every backup of it made while protected) is unreadable. Backups made before
+  you set a password stay unprotected; delete them if that matters.
+  If your data is confidential, check any rules before putting the file in a cloud folder.
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+"npm is not recognized" / "node is not recognized"
+    Close the terminal, open a NEW one (the installer only updates new windows).
+    Still failing: reinstall Node.js LTS.
+
+npm install finishes but npm start says Electron failed to install / path.txt missing
+    Run:   node node_modules/electron/install.js        (Windows: node node_modules\electron\install.js)
+    then:  npm start
+
+Download errors (ETIMEDOUT, ECONNRESET, 403) while installing or building
+    Network/VPN/proxy is blocking npm or github.com. Try without VPN or on another network.
+    Downloads needed: registry.npmjs.org and github.com (Electron + packager tools).
+
+Windows build error "Cannot create symbolic link ... A required privilege is not held"
+    Turn on Developer Mode: Settings > System > For developers > Developer Mode,
+    OR run the terminal as Administrator. Then run  npm run dist:win  again.
+    If a half-finished cache confuses it, delete the folder
+    %LOCALAPPDATA%\electron-builder\Cache  and retry.
+
+Build seems stuck on "downloading"
+    The first build downloads ~100 MB. Wait a few minutes.
+
+Windows exe starts but shows a blank window
+    Note the exact message or what you see and report it. (Not seen in testing,
+    which was on Linux only.)
+
+Clean rebuild:  delete the folders  dist  and  node_modules,  then  npm install  and build again.
+
+
+WHAT HAS AND HAS NOT BEEN VERIFIED
+----------------------------------
+Tested (on Linux, in the real Electron app, scripted): first-launch tutorial runs once and
+not again; tutorial replay inside a file with entries leaves the file and the in-memory map
+unchanged; empty start with no categories; first entry asks for a category; creating
+categories, connection types (one-way and both-ways, without arrow symbols) and views;
+settings survive a restart; creating/opening/saving the .orbweave file; password set /
+wrong / right; reload when the file changes elsewhere; network requests from the app are
+blocked; no Node access in the page; unit tests of the file format and file session.
+The Windows portable exe was produced by the packager on Linux. It was NOT run.
+The Mac dmg was NOT built or run (needs a Mac). Mac code signing is ad-hoc only.
+Windows and Mac behaviour of the file dialogs, menus, file locking by sync clients and
+the first-run security prompts is untested. If your build or run fails, keep the exact
+terminal output.
