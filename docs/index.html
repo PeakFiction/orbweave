@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orbweave: a private, offline map of what you need to remember</title>
+<meta name="description" content="Orbweave is a free, offline desktop app for mapping people, teams, systems, terms and ideas, and how they connect. No account, no cloud, no AI.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<style>
+:root{--bg:#070b1a;--bg2:#0d1430;--card:#101938;--line:#222c52;--tx:#e8ecfb;--mute:#9aa6cf;--acc:#6ea8ff;--acc2:#b79cff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 700px at 70% -10%,#16214b 0,var(--bg) 60%);color:var(--tx);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--acc)}a:hover{color:#fff}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:22px 0}
+.brand{letter-spacing:.32em;font-weight:700;font-size:15px}
+nav a{white-space:nowrap;margin-left:22px;text-decoration:none;color:var(--mute);font-size:15px}nav a:hover{color:#fff}
+.hero{padding:56px 0 30px;text-align:center}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.08;margin:0 0 18px;letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{max-width:680px;margin:0 auto 28px;color:var(--mute);font-size:19px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:600;border:1px solid var(--line);color:var(--tx);background:var(--card)}
+.btn.p{background:linear-gradient(90deg,#4f86ff,#8d6bff);border-color:transparent;color:#fff}
+.btn:hover{filter:brightness(1.15);color:#fff}
+.shot{margin:46px auto 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px #0009;background:var(--bg2)}
+.shot img{display:block;width:100%;height:auto}
+figcaption{font-size:14px;color:var(--mute);padding:10px 16px;border-top:1px solid var(--line)}
+section{padding:64px 0 8px}
+h2{font-size:clamp(26px,4vw,36px);margin:0 0 10px;letter-spacing:-.01em}
+.sub{color:var(--mute);margin:0 0 28px;max-width:720px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{margin:0 0 6px;font-size:18px}.card p{margin:0;color:var(--mute);font-size:15.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;margin:34px 0}
+.two.rev .t{order:2}
+.two .shot{margin:0}
+.t h3{font-size:24px;margin:0 0 8px}.t p{color:var(--mute);margin:0 0 10px}
+.note{border-left:3px solid var(--acc2);padding:10px 16px;background:#141c3d;border-radius:0 10px 10px 0;color:var(--mute);font-size:15.5px;margin:18px 0}
+pre{background:#0a1028;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font:14.5px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cfe0ff}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em;color:#cfe0ff}
+ul.ck{list-style:none;padding:0;margin:0}ul.ck li{padding:6px 0 6px 26px;position:relative;color:var(--mute)}
+ul.ck li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+ul.ck b{color:var(--tx)}
+footer{margin:70px 0 0;padding:28px 0 46px;border-top:1px solid var(--line);color:var(--mute);font-size:14.5px}
+@media(max-width:760px){.two,.two.rev{grid-template-columns:1fr}.two.rev .t{order:0}nav a{margin-left:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">ORBWEAVE</div>
+<nav><a href="#features">Features</a><a href="#private">Privacy</a><a href="#get">Get it</a><a href="https://github.com/PeakFiction/orbweave">GitHub</a></nav></header>
+
+<div class="hero">
+<h1>Keep everything straight.<br><span>Offline. Private. Yours.</span></h1>
+<p class="lead">Orbweave is a desktop app that maps the people, teams, systems, terms and ideas you have to keep track of, and how they connect. Built for a new job, a new course, or any pile of things that is too much to hold in your head.</p>
+<div class="btns"><a class="btn p" href="https://github.com/PeakFiction/orbweave/releases">Download</a><a class="btn" href="https://github.com/PeakFiction/orbweave">View on GitHub</a></div>
+<figure class="shot"><img src="img/01-work-overview.webp" width="1440" height="899" alt="Orbweave showing a map of a fictional company: teams, people, systems, terms and processes joined by coloured lines"><figcaption>A fictional company map. Every name in these screenshots is invented.</figcaption></figure>
+</div>
+
+<section id="features">
+<h2>Starting is hard. Remembering is harder.</h2>
+<p class="sub">New workplaces come with a vocabulary: abbreviations, system names, who owns what, who to ask. Courses do too. Orbweave gives it all one place and shows how the pieces relate.</p>
+<div class="grid">
+<div class="card"><h3>Your categories</h3><p>It starts empty. Create the kinds of things you need: Person, Team, System, Term, Concept, Exam. Pick a colour and a shape for each.</p></div>
+<div class="card"><h3>Connections in plain words</h3><p>Define your own, such as "owns / is owned by" or "feeds data to / receives data from". Build them as a sentence. No arrows or symbols to type.</p></div>
+<div class="card"><h3>Names link themselves</h3><p>Write another entry's name in a description and the two connect on their own.</p></div>
+<div class="card"><h3>Views you design</h3><p>Save which categories and connection types to show. Switch between "Who does what", "How data moves" or "Jargon only" in one click.</p></div>
+<div class="card"><h3>Follow what moves</h3><p>Mark a connection as carrying something and trace where it leads or where it came from, step by step.</p></div>
+<div class="card"><h3>Search anything</h3><p>Type a few letters and jump to a term, a person or a system, with its full meaning beside it.</p></div>
+</div>
+
+<div class="two"><div class="t"><h3>Look up anything in seconds</h3><p>Open an entry to see what it is, who owns it, what it connects to, and where it is mentioned.</p></div>
+<figure class="shot"><img loading="lazy" src="img/02-system-panel.webp" width="1440" height="899" alt="An entry panel for a system showing its description, details and connections"></figure></div>
+
+<div class="two rev"><div class="t"><h3>Views for every question</h3><p>Hide what you do not need right now. "Who does what" shows only people and teams.</p></div>
+<figure class="shot"><img loading="lazy" src="img/05-view-who-does-what.webp" width="1440" height="899" alt="A saved view showing only people and teams"></figure></div>
+
+<div class="two"><div class="t"><h3>See how data flows</h3><p>Trace a path along the connections that carry something, with labels for what and how often.</p></div>
+<figure class="shot"><img loading="lazy" src="img/06-view-data-flow-trace.webp" width="1440" height="899" alt="A trace from one system through three others, with labels on each link"></figure></div>
+
+<div class="two rev"><div class="t"><h3>Find a term fast</h3><p>Abbreviations come with their full name and a one-line meaning in the search results.</p></div>
+<figure class="shot"><img loading="lazy" src="img/04-search.webp" width="1440" height="899" alt="Search results for the letters sla, with the matching term highlighted on the map"></figure></div>
+
+<div class="two"><div class="t"><h3>Studying too</h3><p>The same idea works for courses: concepts, readings and exams, and how each one builds on the next.</p></div>
+<figure class="shot"><img loading="lazy" src="img/09-study-concept.webp" width="1440" height="899" alt="A fictional biology study map centred on a protein synthesis concept"></figure></div>
+</section>
+
+<section id="private">
+<h2>Private by design</h2>
+<p class="sub">Orbweave is for notes you might not be allowed to put in the cloud.</p>
+<ul class="ck">
+<li><b>No account, no cloud, no AI.</b> Everything lives in one file on your computer.</li>
+<li><b>Network requests are blocked.</b> The app has a policy that forbids connections and cancels any that are attempted.</li>
+<li><b>Optional password.</b> It encrypts the whole file with scrypt and AES-256-GCM. There is no reset, so keep the password safe.</li>
+<li><b>Backups beside your file.</b> Dated copies are kept in a folder next to it.</li>
+</ul>
+<div class="note">Orbweave is a personal note-taking tool, not a security product. Check your employer's rules before putting confidential material in any note file, wherever it is stored.</div>
+</section>
+
+<section id="get">
+<h2>Get Orbweave</h2>
+<p class="sub">Download a build from the <a href="https://github.com/PeakFiction/orbweave/releases">Releases page</a>, or build it yourself. You need Node.js 22.12 or newer.</p>
+<pre>npm install
+npm start            # run it
+npm run dist:win     # Windows portable .exe (build on Windows)
+npm run dist:mac     # macOS .dmg (build on a Mac)</pre>
+<div class="note"><b>First launch warnings are expected.</b> The builds are not code-signed. Windows SmartScreen shows "Windows protected your PC": choose More info, then Run anyway. On a Mac, right-click the app, choose Open, then Open again. The <a href="https://github.com/PeakFiction/orbweave/blob/main/BUILD%20GUIDE.txt">build guide</a> has the details.</div>
+</section>
+
+<footer>
+Free and open source under the MIT license. Inspired in part by <a href="https://www.acmi.net.au/lens">The Lens at ACMI</a> in Melbourne.<br>
+<a href="https://github.com/PeakFiction/orbweave">Source code</a> · <a href="https://github.com/PeakFiction/orbweave/blob/main/LICENSE">License</a>
+</footer>
+</div>
+</body>
+</html>
